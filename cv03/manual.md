@@ -82,7 +82,24 @@ $ mount /dev/mapper/crypted /mnt
 /etc/fstab
 ```
 
-### CA jednoduse
+### Prace s klici
+
+```bash
+$ cryptsetup luksDump /dev/vgbsa/test
+$ cryptsetup luksAddKey /dev/vgbsa/test /some/key/file
+$ cryptsetup luksAddKey /dev/vgbsa/test -S 6
+$ cryptsetup luksRemoveKey /dev/vgbsa/test
+$ cryptsetup luksKillSlot /dev/vgbsa/test 6
+```
+
+### Zaloha a obnoveni
+
+```bash
+$ cryptsetup luksHeaderBackup /dev/vgbsa/test --header-backup-file /mnt/vgbsa_test.img
+$ cryptsetup luksHeaderRestore /dev/vgbsa/test --header-backup-file /mnt/vgbsa_test.img
+```
+
+## CA jednoduse
 
 (kopie easy-rsa)
 
