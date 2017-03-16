@@ -36,7 +36,7 @@ ifconfig -a
 
 ```bash
 vconfig add eth0 3
-vconfig rem eth0 3
+vconfig rem eth0.3
 ```
 
 ## Iptables
