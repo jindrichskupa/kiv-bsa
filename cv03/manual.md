@@ -12,37 +12,37 @@ $ apt-get install libpam-pwquality
 
 `/etc/pam.d/common-password`:
 
-(vychozi nastaveni)
+### vychozi nastaveni
 
 ```
 password    requisite     pam_pwquality.so try_first_pass local_users_only retry=3 authtok_type=
 ```
 
-(vynuceni sily hesla)
+### vynuceni sily hesla
 
 ```
 password    requisite     pam_pwquality.so minlen=19 lcredit=0 ucredit=1 dcredit=1 ocredit=2
 ```
 
-(historie hesel)
+### historie hesel
 
 ```
 password    required      pam_pwhistory.so remember=400 use_authtok
 ```
 
-(zablokovani uctu)
+### zablokovani uctu
 
 ```
 auth       required     pam_tally2.so deny=3 unlock_time=1800 even_deny_root
 ```
 
-(slovnikova hesla)
+### slovnikova hesla
 
 ```
 password required pam_cracklib.so retry=3 minlen=6 difok=3
 ```
 
-(manual)
+### manual
 
 ```bash
 $ man 8 pam_pwquality
@@ -107,14 +107,14 @@ $ cryptsetup luksHeaderRestore /dev/vgbsa/test --header-backup-file /mnt/vgbsa_t
 $ cp -r /usr/share/easy-rsa/ /etc/CA2
 ```
 
-(nastaveni CA)
+### nastaveni CA a defaultni hodnoty pro certifikaty
 
 ```bash
 $ vim /etc/CA2/vars
 $ vim /etc/CA2/openssl-1.0.0.cnf
 ```
 
-(vytvoreni CA)
+### vytvoreni CA
 
 ```bash
 cd /etc/CA2
@@ -122,7 +122,7 @@ cd /etc/CA2
 ./build-ca
 ```
 
-(vytvoreni certifikatu)
+### vytvoreni certifikatu
 
 ```bash 
 cd /etc/CA2
@@ -131,12 +131,10 @@ cd /etc/CA2
 ./build-key-pass client.bsa-jindra.bsa
 ```
 
-(revokace certifikatu)
+### revokace certifikatu
 
 ```bash
 cd /etc/CA2
 ./revoke-full
 ./list-crl
 ```
-
-
