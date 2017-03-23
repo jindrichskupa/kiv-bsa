@@ -1,5 +1,52 @@
 # Cviceni 4
 
+## GPG
+
+```bash
+vim ~/.gnupg/gpg.conf
+gpg --gen-key
+gpg --gen-revoke user@bsa-jindra.bsa
+gpg --keyserver pool.sks-keyservers.net --send-key 'AAAA BBBB CCCC DDD'
+gpg --import
+gpg --export
+gpg --armor --output bsa-user.gpg --export user@bsa-jindra.bsa
+gpg --list-keys
+gpg --list-sigs
+```
+
+### Sifrovani / desifrovani
+
+```bash
+gpg -e Recipient [Data]
+gpg --output doc.gpg --encrypt --recipient user2@bsa-jindra.bsa
+gpg -d [Data]
+gpg --output doc --decrypt doc.gpg
+```
+
+### Dodepsani / overeni podpisu
+
+```bash
+gpg -s [Data]
+gpg -b [Data]
+gpg --sign --encrypt [Data]
+gpg --verify [Data]
+```
+
+
+### Overeni zdrojovych baliku
+
+```bash
+wget 'http://pgp.surfnet.nl:11371/pks/lookup?op=get&search=0xF4FCBB07' -O F4FCBB07.asc
+gpg --import F4FCBB07.asc
+wget http://cdn-fastly.deb.debian.org/debian/pool/main/k/knot/knot_1.6.0-1.dsc
+gpg --verify knot_1.6.0-1.dsc
+```
+
+```bash
+gpg --list-sig
+```
+
+
 ## John the Ripper
 
 ```bash
