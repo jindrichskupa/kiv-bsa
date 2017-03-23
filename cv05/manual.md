@@ -65,3 +65,23 @@ vim /etc/dnsmasq.d/bsa.conf
 host-record=server,10.255.0.1
 host-record=hidden-client,10.255.0.1
 ```
+
+## Limit zdroju
+
+### Procesy a pamet
+
+/etc/security/limits.conf
+
+```bash
+ulimit -a
+pepa     soft    nproc          5
+```
+
+### SSH
+
+```bash
+	/etc/ssh/sshd_config
+	Match user pepa
+	   ChrootDirectory /home/pepa 		# ( POZOR - musi vlastnit root )
+	   ForceCommand internal-sftp -u 002
+```
