@@ -1,0 +1,2 @@
+push "route 192.168.XX.XX 255.255.255.128 192.168.XX.XX"
+ifconfig-push 192.168.XX.XX 255.255.255.0

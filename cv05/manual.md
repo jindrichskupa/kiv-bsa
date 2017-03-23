@@ -8,6 +8,13 @@
 apt-get install openvpn
 ```
 
+###Konfigurace PSK
+
+```bash
+wget https://raw.githubusercontent.com/jindrichskupa/kiv-bsa/master/cv05/bsa-server-psk.conf
+openvpn --genkey --secret bsa-server-psk.key
+```
+
 ### Konfigurace
 
 Vytvoreni CA + certifikatu
@@ -27,15 +34,34 @@ mkdir keys; touch keys/index.txt; echo "01" > keys/serial
 ./build-key bsa-client-01
 ```
 
-Konfigurace OpenVPN
+Konfigurace OpenVPN - server
 
 ```bash
-wget ...
+wget https://raw.githubusercontent.com/jindrichskupa/kiv-bsa/master/cv05/bsa-server.conf
+wget https://raw.githubusercontent.com/jindrichskupa/kiv-bsa/master/cv05/bsa-client-01
 ```
+
+Konfigurace OpenVPN - client
+
+```bash
+wget https://raw.githubusercontent.com/jindrichskupa/kiv-bsa/master/cv05/bsa-client-01.conf
+``` 
 
 ### Start / stop / restart
 
 ```bash
 systemctl start openvpn@bsa-server
 systemctl start openvpn@bsa-client-01
+```
+
+## DNSMASQ
+
+```bash
+apt-get install dnsmasq
+vim /etc/dnsmasq.d/bsa.conf
+```
+
+```
+host-record=server,10.255.0.1
+host-record=hidden-client,10.255.0.1
 ```
