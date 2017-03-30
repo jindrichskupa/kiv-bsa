@@ -8,7 +8,7 @@
 apt-get install openvpn
 ```
 
-###Konfigurace PSK
+### Konfigurace PSK
 
 ```bash
 wget https://raw.githubusercontent.com/jindrichskupa/kiv-bsa/master/cv05/bsa-server-psk.conf
