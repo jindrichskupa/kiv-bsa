@@ -1,3 +1,3 @@
-# Cviceni 7
+# Cviceni 6
 
-## Mail
+## DNS
