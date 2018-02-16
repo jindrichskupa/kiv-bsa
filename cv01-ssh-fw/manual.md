@@ -24,7 +24,8 @@ sed | awk
 
 ```bash
 ssh-keygen -t rsa -b 4096 -C "jindra@spos"
-ssh-agent | eval `ssh-agent`
+ssh-agent
+eval `ssh-agent`
 ssh-add
 ssh-copy-id
 cat ~/.ssh/authorized_keys
@@ -53,6 +54,7 @@ cat ~/.ssh/config
 Host spos
    HostName 147.228.67.42
    User root
+   IdentityFile ~/.ssh/id_rsa_bsa
    Port 22
 ```
 
