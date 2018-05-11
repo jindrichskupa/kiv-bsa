@@ -87,6 +87,7 @@ $ mount /dev/mapper/crypted /mnt
 ```bash
 $ cryptsetup luksDump /dev/vgbsa/test
 $ cryptsetup luksAddKey /dev/vgbsa/test /some/key/file
+$ cryptsetup luksAddKey /dev/vgbsa/test /some/key/file -b /some/existing/key/file
 $ cryptsetup luksAddKey /dev/vgbsa/test -S 6
 $ cryptsetup luksRemoveKey /dev/vgbsa/test
 $ cryptsetup luksKillSlot /dev/vgbsa/test 6
