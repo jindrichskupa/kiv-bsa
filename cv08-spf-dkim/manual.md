@@ -141,3 +141,9 @@ Domain Message Authentication, Reporting & Conformance (DMARC)
 _dmarc
 v=DMARC1;p=quarantine;sp=quarantine;adkim=r;aspf=r
 ```
+
+## Reference
+
+* [DMARC](https://www.root.cz/clanky/dmarc-overeni-odesilatelovy-domeny/)
+* [ADSP](http://www.abclinuxu.cz/clanky/dkim-zavadime-podpisovou-politiku-adsp)
+* [TLSA](https://www.root.cz/clanky/bezpecnejsi-predavani-posty-s-tlsa-zaznamy/)
