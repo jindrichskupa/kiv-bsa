@@ -52,6 +52,29 @@ policyd-spf unix    -       n       n       -       -      spawn
   user=vmail argv=/usr/bin/policyd-spf
 ```
 
+```
+smtpd_recipient_restrictions = permit_sasl_authenticated,permit_mynetworks,reject_unauth_destination,check_policy_service unix:private/policy
+#or
+smtpd_recipient_restrictions =
+            reject_unauth_destination
+            check_policy_service unix:private/policy
+```
+
+Testing
+
+```
+request=smtpd_access_policy
+protocol_state=RCPT
+protocol_name=SMTP
+helo_name=h****forge.com
+queue_id=8045F2AB23
+sender=
+recipient=falko.timme@*******.de
+client_address=1.2.3.4
+client_name=www.example.com
+[empty line]
+```
+
 ## DKIM
 
 ```bash
