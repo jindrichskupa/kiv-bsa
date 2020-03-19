@@ -1,5 +1,11 @@
 # Cviceni 4
 
+Zvyseni entropie na VMs
+
+```
+apt install rng-tools
+```
+
 ## GPG
 
 ```bash
