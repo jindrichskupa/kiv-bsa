@@ -100,7 +100,7 @@ $ cryptsetup luksHeaderBackup /dev/vgbsa/test --header-backup-file /mnt/vgbsa_te
 $ cryptsetup luksHeaderRestore /dev/vgbsa/test --header-backup-file /mnt/vgbsa_test.img
 ```
 
-## CA jednoduse
+## CA jednoduse (Easy RSA - 2.0)
 
 (kopie easy-rsa)
 
@@ -139,3 +139,29 @@ cd /etc/CA2
 ./revoke-full
 ./list-crl
 ```
+
+## EasyRSA 3.0
+
+```
+# Setup
+$ cp -r /usr/share/easy-rsa/ /etc/CA3
+$ cd /etc/CA3
+$ mv vars.example vars
+$ vim vars
+$ ./easyrsa init-pki
+$ ./easyrsa build-ca
+
+# Server certificate 
+$ ./easyrsa gen-req server.jindra.bsa
+$ ./easyrsa sign server server.jindra.bsa
+
+# Revoke
+$ ./easyrsa revoke server.jindra.bas
+$ ./easyrsa gen-crl
+```
+
+https://easy-rsa.readthedocs.io/en/latest/advanced/
+
+## Step CA
+
+Alternativne: https://github.com/smallstep/certificates/blob/master/docs/GETTING_STARTED.md
