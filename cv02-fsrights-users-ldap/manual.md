@@ -196,3 +196,6 @@ aktualizace nastaveni
 pam-auth-update
 ```
 
+## Google Authenticator
+
+https://www.vultr.com/docs/how-to-setup-two-factor-authentication-2fa-for-ssh-on-debian-9-using-google-authenticator
