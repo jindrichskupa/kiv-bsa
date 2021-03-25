@@ -58,6 +58,17 @@ Host spos
    Port 22
 ```
 
+Pripojeni pres host:
+
+```
+Host bsa-eryx
+  Hostname 147.228.67.150
+  User root
+  Port 22
+  ProxyCommand ssh -W 147.228.67.150:22 skupaj@eryx.zcu.cz
+```
+
+
 ### Zakladni nastaveni serveru
 
 ```

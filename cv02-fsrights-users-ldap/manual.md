@@ -196,3 +196,41 @@ aktualizace nastaveni
 pam-auth-update
 ```
 
+## Google Authenticator
+
+instalace pam modulu
+
+```bash
+apt install libpam-google-authenticator
+```
+
+nastaveni authenticatoru per user
+
+```
+google-authenticator
+```
+
+nastaveni pam pro ssh: `/etc/pam.d/sshd`
+
+```
+# zakomentovat
+#@include common-auth
+
+# pridat na konec
+auth required pam_google_authenticator.so
+```
+
+nastaveni sshd: `/etc/ssh/sshd_config`
+
+```
+# zmenit/pridat pokud chcete pouzivat na roota
+PermitRootLogin yes
+# zmenit/pridat
+ChallengeResponseAuthentication yes
+# zmenit/pridat
+AuthenticationMethods publickey,keyboard-interactive
+# uz bysme meli mit nastavene...
+# PasswordAuthentication no
+```
+
+https://www.vultr.com/docs/how-to-setup-two-factor-authentication-2fa-for-ssh-on-debian-9-using-google-authenticator
