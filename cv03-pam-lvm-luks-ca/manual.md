@@ -162,6 +162,49 @@ $ ./easyrsa gen-crl
 
 https://easy-rsa.readthedocs.io/en/latest/advanced/
 
+## Lets encrypt certifikat
+
+````
+cd /opt && git clone https://github.com/lukas2511/dehydrated && cd dehydrated
+cp ./docs/examples/hook.sh /etc/dehydrated/hook.sh && chmod +x /etc/dehydrated/hook.sh
+vim /etc/dehydrated/config
+```
+
+konfigurace
+
+```
+DOMAINS_TXT=/etc/dehydrated/domains
+WELLKNOWN="/var/www/dehydrated/.well-known/acme-challenge/"
+CERTDIR="/etc/letsencrypt/live/"
+CONTACT_EMAIL=skupaj@students.zcu.cz
+HOOK=/etc/dehydrated/hook.sh
+```
+
+vytvorte registraci
+
+```
+dehydrated --register --accept-terms
+```
+
+Apache config
+
+```
+	Alias /.well-known/acme-challenge/ /var/www/dehydrated/.well-known/acme-challenge/
+```
+
+Nginx config
+
+```
+        location /.well-known/acme-challenge {
+            alias   /var/www/dehydrated/.well-known/acme-challenge;
+        }
+# redirect
+        if ($scheme = http) {
+                return 302 https://$server_name$request_uri;
+        }
+
+```
+
 ## Step CA
 
 Alternativne: https://github.com/smallstep/certificates/blob/master/docs/GETTING_STARTED.md
