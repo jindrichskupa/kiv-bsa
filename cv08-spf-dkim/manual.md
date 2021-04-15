@@ -60,7 +60,10 @@ smtpd_recipient_restrictions =
             check_policy_service unix:private/policy
 ```
 
+
 Testing
+
+`$ socat - UNIX-CONNECT:private/policy` nebo `nc -U private/policy`
 
 ```
 request=smtpd_access_policy
@@ -74,6 +77,12 @@ client_address=1.2.3.4
 client_name=www.example.com
 [empty line]
 ```
+
+## Forwarding
+
+* http://www.open-spf.org/SRS/
+* https://jichu4n.com/posts/setting-up-dkim-and-srs-in-postfix/
+* https://old.blog.phusion.nl/2012/09/10/mail-in-2012-from-an-admins-perspective/
 
 ## DKIM
 
