@@ -27,6 +27,15 @@ mail.*                                                  -?HourlyMailLog;SyslForm
 * Vzdalene logovani
 
 ```
+
+# provides UDP syslog reception
+module(load="imudp")
+input(type="imudp" port="514")
+
+# provides TCP syslog reception
+module(load="imtcp")
+input(type="imtcp" port="514")
+
 # naslouchat na 0.0.0.0/514/UDP
 $UDPServerAddress 0.0.0.0
 $UDPServerRun 514
