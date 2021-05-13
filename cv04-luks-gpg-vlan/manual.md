@@ -152,12 +152,16 @@ openssl s_client -connect 147.228.67.151:443
 curl https://147.228.67.151
 ```
 
+## Duveryhodna CA
+
+Editovat: `/etc/ca-certificates.conf`
+
 ```bash
 # pridani 
-cp /etc/CA2/keys/ca.crt /usr/local/share/ca-certificates/ca-bsa.crt
+cp /etc/CA2/keys/ca.crt /usr/share/ca-certificates/ca-bsa.crt
 update-ca-certificates
 # odebrani
-rm /usr/local/share/ca-certificates/ca-bsa.crt
+rm /usr/share/ca-certificates/ca-bsa.crt
 update-ca-certificates --fresh
 ```
 
