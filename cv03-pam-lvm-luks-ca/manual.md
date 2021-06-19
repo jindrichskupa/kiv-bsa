@@ -83,7 +83,7 @@ $ mount /dev/mapper/decrypted /mnt
 ### Persistetni pouziti
 
 ```bash
-/etc/cryptotab
+/etc/crypttab
 /etc/fstab
 ```
 
