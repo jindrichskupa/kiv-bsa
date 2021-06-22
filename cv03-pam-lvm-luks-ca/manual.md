@@ -70,15 +70,20 @@ $ lvcreate -L 1G -n test vgbsa
 
 ```bash
 $ cryptsetup -y -v luksFormat /dev/vgbsa/test
-$ cryptsetup luksOpen /dev/vgbsa/test crypted
-$ mkfs.ext4 /dev/mapper/crypted
-$ mount /dev/mapper/crypted /mnt
+```
+
+`/dev/vgbsa/test` je nyní šifrované, otevřeme nad ním dešifrované rozhraní `decrypted`
+
+```bash
+$ cryptsetup luksOpen /dev/vgbsa/test decrypted
+$ mkfs.ext4 /dev/mapper/decrypted
+$ mount /dev/mapper/decrypted /mnt
 ```
 
 ### Persistetni pouziti
 
 ```bash
-/etc/cryptotab
+/etc/crypttab
 /etc/fstab
 ```
 
