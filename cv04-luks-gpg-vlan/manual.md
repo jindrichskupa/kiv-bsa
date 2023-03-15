@@ -6,6 +6,16 @@ Zvyseni entropie na VMs
 apt install rng-tools
 ```
 
+## OpenSSL
+
+```
+openssl genrsa -out key.pem 4096
+openssl rsa -in key.pem -pubout > key.pub
+
+openssl dgst -sign key.pem -keyform PEM -sha256 -out data.zip.sign -binary data.zip
+openssl dgst -verify key.pub -keyform PEM -sha256 -signature data.
+```
+
 ## GPG
 
 ```bash

@@ -47,6 +47,39 @@ Konfigurace OpenVPN - client
 wget https://raw.githubusercontent.com/jindrichskupa/kiv-bsa/master/cv05-openvpn/bsa-client-01.conf
 ``` 
 
+Generator klientske 
+
+```bash
+#!/bin/bash
+
+cat << EOF > client_$1.conf
+remote bsa-150.kiv.zcu.cz
+tls-client
+port 1195
+proto udp
+dev tun
+pull
+
+cipher AES-128-CBC
+comp-lzo
+verb 3
+
+route-delay 2
+
+<ca>
+$(cat /etc/CA/pki/ca.crt)
+</ca>
+
+<cert>
+$(cat /etc/CA/pki/issued/$1.crt)
+</cert>
+
+<key>
+$(cat /etc/CA/pki/private/$1.key)
+</key>
+EOF
+```
+
 ### Start / stop / restart
 
 ```bash
