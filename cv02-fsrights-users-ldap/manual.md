@@ -234,3 +234,18 @@ AuthenticationMethods publickey,keyboard-interactive
 ```
 
 https://www.vultr.com/docs/how-to-setup-two-factor-authentication-2fa-for-ssh-on-debian-9-using-google-authenticator
+
+## Sudo
+
+```
+# Members of the admin group may gain root privileges
+%admin ALL=(ALL) ALL
+
+# Allow members of group sudo to execute any command
+%sudo	ALL=(ALL:ALL) ALL
+
+admin ALL=(ALL) NOPASSWD: ALL
+%sudoall ALL=(ALL:ALL) NOPASSWD: ALL
+
+service ALL=(ALL:ALL) NOPASSWD: /bin/systemctl restart service, /bin/systemctl start service, /bin/systemctl stop service, /bin/systemctl status service
+```
