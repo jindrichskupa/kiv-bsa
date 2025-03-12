@@ -11,7 +11,7 @@ apt-get install openvpn
 ### Konfigurace PSK
 
 ```bash
-wget https://raw.githubusercontent.com/jindrichskupa/kiv-bsa/master/cv05-openvpn/bsa-server-psk.conf
+wget https://raw.githubusercontent.com/jindrichskupa/kiv-bsa/master/cv05-vpn/bsa-server-psk.conf
 openvpn --genkey --secret bsa-server-psk.key
 ```
 
@@ -37,14 +37,14 @@ mkdir keys; touch keys/index.txt; echo "01" > keys/serial
 Konfigurace OpenVPN - server
 
 ```bash
-wget https://raw.githubusercontent.com/jindrichskupa/kiv-bsa/master/cv05-openvpn/bsa-server.conf
-wget https://raw.githubusercontent.com/jindrichskupa/kiv-bsa/master/cv05-openvpn/bsa-client-01
+wget https://raw.githubusercontent.com/jindrichskupa/kiv-bsa/master/cv05-vpn/bsa-server.conf
+wget https://raw.githubusercontent.com/jindrichskupa/kiv-bsa/master/cv05-vpn/bsa-client-01
 ```
 
 Konfigurace OpenVPN - client
 
 ```bash
-wget https://raw.githubusercontent.com/jindrichskupa/kiv-bsa/master/cv05-openvpn/bsa-client-01.conf
+wget https://raw.githubusercontent.com/jindrichskupa/kiv-bsa/master/cv05-vpn/bsa-client-01.conf
 ``` 
 
 Generator klientske 
@@ -117,4 +117,52 @@ pepa     soft    nproc          5
 	Match user pepa
 	   ChrootDirectory /home/pepa 		# ( POZOR - musi vlastnit root )
 	   ForceCommand internal-sftp -u 002
+```
+
+
+## Wireguard
+
+```
+apt install wireguard
+wg genkey > /etc/wireguard/private.key
+cat /etc/wireguard/private.key | wg pubkey > /etc/wireguard/public.key
+```
+
+### /etc/wireguard/wg0.conf (server)
+
+```
+[Interface]
+PrivateKey = <local_private_key>
+Address = 10.255.255.1/24
+ListenPort = 51820
+SaveConfig = true
+
+PostUp = iptables -t nat -I POSTROUTING -o eth0 -j MASQUERADE
+PreDown = iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+```
+
+service:
+
+```
+systemctl enable wg-quick@wg0.service
+systemctl start wg-quick@wg0.service
+```
+
+add peer
+
+```
+wg set wg0 peer <peers_public_key> allowed-ips 10.255.255.2
+```
+
+### /etc/wireguard/wg0.conf (peer)
+
+```
+[Interface]
+PrivateKey = <local_private_key>
+Address = 10.255.255.2/24
+
+[Peer]
+PublicKey = U9uE2kb/nrrzsEU58GD3pKFU3TLYDMCbetIsnV8eeFE=
+AllowedIPs = 10.255.255.1/24
+Endpoint = <server_ip>:51820
 ```
